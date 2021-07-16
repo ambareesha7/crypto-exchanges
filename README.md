@@ -1,5 +1,7 @@
-# Cryptos
-me practicing to advance my elixir skills
+# Get info from crypto-exchanges
+
+me practicing to advance my elixir skills,
+
 trying to use genservers, phoenix pubsub, liveview,
 
 ## Get info from crypto-exchanges
