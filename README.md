@@ -1,4 +1,8 @@
 # Cryptos
+me practicing to advance my elixir skills
+trying to use genservers, phoenix pubsub, liveview,
+
+## Get info from crypto-exchanges
 
 To start your Phoenix server:
 
