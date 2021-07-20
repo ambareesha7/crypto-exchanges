@@ -2,6 +2,7 @@ defmodule Cryptos.Product do
   @moduledoc """
   product is a struct of exchange_name and currency_pair
   """
+
   @type t :: %__MODULE__{
           exchange_name: String.t(),
           currency_pair: String.t()
