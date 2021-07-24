@@ -1,19 +1,32 @@
 defmodule Cryptos.Exchanges do
   alias Cryptos.{Product, Trade}
 
+  @cryptos_pubsub Application.get_env(:cryptos, CryptosWeb.Endpoint)
+                  |> Keyword.fetch!(:pubsub_server)
+
+  @clients [
+    Cryptos.Exchanges.BitstampClient,
+    Cryptos.Exchanges.CoinbaseClient
+  ]
+  @available_products (for client <- @clients, pair <- client.available_currency_pairs() do
+                         Product.new(client.exchange_name(), pair)
+                       end)
+  def clients, do: @clients
+  def available_products(), do: @available_products
+
   @spec subscriibe(Product.t()) :: :ok | {:error, term()}
   def subscriibe(product) do
-    Phoenix.PubSub.subscribe(Cryptos.PubSub, topic(product))
+    Phoenix.PubSub.subscribe(@cryptos_pubsub, topic(product))
   end
 
   @spec unsubscribe(Product.t()) :: :ok | {:error, term()}
   def unsubscribe(product) do
-    Phoenix.PubSub.unsubscribe(Cryptos.PubSub, topic(product))
+    Phoenix.PubSub.unsubscribe(@cryptos_pubsub, topic(product))
   end
 
   @spec broadcast(Trade.t()) :: :ok | {:error, term()}
   def broadcast(trade) do
-    Phoenix.PubSub.broadcast(Cryptos.PubSub, topic(trade.product), {:new_trade, trade})
+    Phoenix.PubSub.broadcast(@cryptos_pubsub, topic(trade.product), {:new_trade, trade})
   end
 
   @spec topic(Product.t()) :: String.t()
