@@ -11,4 +11,5 @@ defmodule Cryptos do
   defdelegate subscribe_to_trades(product), to: Cryptos.Exchanges, as: :subscribe
   defdelegate unsubscribe_from_trades(product), to: Cryptos.Exchanges, as: :unsubscribe
   defdelegate get_last_trade(product), to: Cryptos.Historical
+  defdelegate get_last_trades(products), to: Cryptos.Historical
 end

@@ -11,6 +11,8 @@ defmodule Cryptos.Application do
       CryptosWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Cryptos.PubSub},
+      {Cryptos.Historical, name: Cryptos.Historical},
+      {Cryptos.Exchanges.Supervisor, name: Cryptos.Exchanges.Supervisor},
       # Start the Endpoint (http/https)
       CryptosWeb.Endpoint
       # Start a worker by calling: Cryptos.Worker.start_link(arg)
